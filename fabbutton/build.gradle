@@ -27,10 +27,10 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
 version = "1.2.0"
-group = "mbanje.kurt"
+group = "ca.hoogit"
 
-def siteUrl = 'https://github.com/ckurtm/FabButton'
-def gitUrl = 'https://github.com/ckurtm/FabButton.git'
+def siteUrl = 'https://github.com/jordond/FabButton'
+def gitUrl = 'https://github.com/jordond/FabButton.git'
 
 android {
     compileSdkVersion 21
@@ -59,27 +59,31 @@ properties.load(project.rootProject.file('local.properties').newDataInputStream(
 
 bintray {
     user = properties.getProperty("bintray.user")
-    key = properties.getProperty("bintray.key")
+    key = properties.getProperty("bintray.apikey")
 
     configurations = ['archives']
     pkg {
         repo = "maven"
-        name = "FabButton"
+        name = "fabbutton"
         websiteUrl = siteUrl
         vcsUrl = gitUrl
-        licenses = ["Apache-2.0"]
+        licenses = ["MIT"]
         publish = true
     }
 }
 
-
 install {
     repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
         pom {
             project {
                 packaging 'aar'
-                name 'Android Floating ActionButton with a progress indicator ring'
+
+                // Add your description here
+                name 'FAB with a progress ring'
                 url siteUrl
+
+                // Set your license
                 licenses {
                     license {
                         name 'The Apache Software License, Version 2.0'
@@ -88,9 +92,9 @@ install {
                 }
                 developers {
                     developer {
-                        id 'fabbutton'
-                        name 'Kurt Mbanje'
-                        email 'ckurtm@gmail.com'
+                        id 'jordond'
+                        name 'Jordon de Hoog'
+                        email 'jordondehoog@gmail.com'
                     }
                 }
                 scm {
@@ -104,6 +108,8 @@ install {
     }
 }
 
+dependencies {
+}
 
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
@@ -131,4 +137,3 @@ task findConventions << {
 
 task wrapper(type: Wrapper) {
 }
-
